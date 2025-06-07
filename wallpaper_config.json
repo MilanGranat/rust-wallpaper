@@ -1,0 +1,534 @@
+{
+  "location": "PUT_YOUR_CITY_NAME_OR_ZIP_CODE_HERE",
+  "api_key": "YOUR_API_KEY_HERE",
+  "items": [
+    {
+      "start_hour": 5,
+      "end_hour": 7,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_morning_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 5,
+      "end_hour": 7,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_morning_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 5,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 5,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 5,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 5,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 8,
+      "end_hour": 16,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 8,
+      "end_hour": 16,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_day_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 17,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_evening_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 17,
+      "end_hour": 19,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_evening_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 20,
+      "end_hour": 4,
+      "start_month": 3,
+      "end_month": 5,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/spring_night_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 6,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_morning_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 6,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_morning_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 4,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_day_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_evening_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 20,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_evening_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 21,
+      "end_hour": 3,
+      "start_month": 6,
+      "end_month": 8,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/summer_night_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 8,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_morning_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 8,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_morning_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 6,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 9,
+      "end_hour": 15,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 9,
+      "end_hour": 15,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_day_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 16,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_evening_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 16,
+      "end_hour": 18,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_evening_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 19,
+      "end_hour": 5,
+      "start_month": 9,
+      "end_month": 11,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/autumn_night_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 8,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_morning_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 8,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_morning_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 7,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_snow.jpg",
+      "weather": "Snow"
+    },
+    {
+      "start_hour": 9,
+      "end_hour": 14,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 9,
+      "end_hour": 14,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_day_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 15,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_evening_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 15,
+      "end_hour": 17,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_evening_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_clear.jpg",
+      "weather": "Clear"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_cloudy.jpg",
+      "weather": "Cloudy"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_overcast.jpg",
+      "weather": "Overcast"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_rain.jpg",
+      "weather": "Rain"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_thunderstorm.jpg",
+      "weather": "Thunderstorm"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_fog.jpg",
+      "weather": "Fog"
+    },
+    {
+      "start_hour": 18,
+      "end_hour": 6,
+      "start_month": 12,
+      "end_month": 2,
+      "wallpaper_path": "/home/user_name/Pictures/Wallpapers/service/winter_night_snow.jpg",
+      "weather": "Snow"
+    }
+  ]
+}
