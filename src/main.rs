@@ -112,9 +112,13 @@ fn main() {
 
         // apply config
         if let Some(ref conf) = config {
-            match fetch_weather_condition(&conf.api_key, &conf.location) {
-                Ok(condition) => {current_condition = condition;},
-                Err(e) => eprintln!("Failed to fetch weather: {}", e),
+            if conf.api_key.is_empty() || conf.location.is_empty() {
+                current_condition = Weather::Clear;
+            } else {
+                match fetch_weather_condition(&conf.api_key, &conf.location) {
+                        Ok(condition) => {current_condition = condition;},
+                        Err(e) => eprintln!("Failed to fetch weather: {}", e),
+                }
             }
 
             let wallpaper_path = get_best_wallpaper_match(&current_condition, conf);
