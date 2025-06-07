@@ -1,0 +1,230 @@
+use std::fs;
+use std::io;
+use std::path::Path;
+use std::process::Command;
+use std::{thread, time::Duration};
+
+use std::time::SystemTime;
+use chrono::{Datelike, Local, Timelike};
+use serde::Deserialize;
+use reqwest::blocking::get;
+
+
+// ---- WEATHER CONFIG STRUCTS ----
+#[derive(Deserialize)]
+struct WallpaperConfigItem {
+   start_hour: i32,
+   end_hour: i32,
+   start_month: i32,
+   end_month: i32,
+   wallpaper_path: String,
+   weather: Weather,
+}
+
+#[derive(Deserialize)]
+enum Weather {
+    Clear,
+    Cloudy,
+    Overcast,
+    Rain,
+    Thunderstorm,
+    Snow,
+    Fog
+}
+
+#[derive(Deserialize)]
+struct WallpaperConfig {
+    items: Vec<WallpaperConfigItem>,
+}
+
+// ---- WEATHER API STRUCTS ----
+//
+#[derive(Debug, Deserialize)]
+struct WeatherApiResponse {
+    current: Current,
+}
+
+#[derive(Debug, Deserialize)]
+struct Current {
+    condition: Condition,
+}
+
+#[derive(Debug, Deserialize)]
+struct Condition {
+    text: String,
+    code: i32,
+}
+
+// CONSTS
+const CONFIG_FILE: &str = "/home/sysfun/WallpaperSetup/wallpaper_config.json";
+const API_KEY: &str = "3befc856b6154f269b1205629250905";
+const CITY: &str = "Nitra";
+
+// ---- MAIN ----
+fn main() {
+    let mut last_modified: Option<SystemTime> = None;
+    let mut config: Option<WallpaperConfig> = None;
+    let mut current_condition: Weather = Weather::Clear;
+
+    loop {
+        // check loaded file & reload if needed
+        match fs::metadata(CONFIG_FILE) {
+            Ok(metadata) => {
+                match metadata.modified() {
+                    Ok(modified_time) => {
+                        let reload_needed = match last_modified {
+                            Some(prev_time) => modified_time > prev_time,
+                            None => true,
+                        };
+
+                        if reload_needed {
+                            println!("Reloading config...");
+                            match load_config_with_timestamp(CONFIG_FILE) {
+                                Ok((new_config, new_time)) => {
+                                    config = Some(new_config);
+                                    last_modified = Some(new_time);
+                                }
+                                Err(e) => {
+                                    eprintln!("Failed to reload config: {}", e);
+                                }
+                            }
+                        }
+                    }
+                    Err(e) => {
+                        eprintln!("Couldn't get file modification time: {}", e);
+                    }
+                }
+            }
+            Err(_) => {
+                eprintln!("Config file not found.");
+            }
+        }
+
+        // apply config
+        if let Some(ref conf) = config {
+            match fetch_weather_condition(API_KEY, CITY) {
+                Ok(condition) => {current_condition = condition;},
+                Err(e) => eprintln!("Failed to fetch weather: {}", e),
+            }
+
+            let wallpaper_path = get_best_wallpaper_match(&current_condition);
+
+            if !wallpaper_path.is_empty() {
+                set_wallpaper(&wallpaper_path);
+            } else {
+                println!("No match");
+            }
+            thread::sleep(Duration::from_secs(300)); // 5 minutes
+        }
+    }
+}
+
+fn get_best_wallpaper_match(weather: &Weather) -> &str {
+    let mut wallpaper: &str = "";
+
+    let now = Local::now();
+    let now_month = now.month() as i32;
+    let now_hour = now.hour() as i32;
+
+
+    let any_match : Vec<&WallpaperConfigItem> = config.items.iter()
+        .filter(|item| {
+            let month_match = if item.start_month > item.end_month {
+                item.start_month <= now_month || item.end_month >= now_month
+            } else {
+                item.start_month <= now_month && item.end_month >= now_month
+            };
+
+            let hour_match = item.start_hour <= now_hour && item.end_hour >= now_hour;
+
+            month_match && hour_match
+        }).collect();
+}
+
+fn load_config_with_timestamp(path: &str) -> Result<(WallpaperConfig, SystemTime), io::Error> {
+    if !Path::new(path).exists() {
+        return Err(io::Error::new(io::ErrorKind::NotFound, "Config file not found"));
+    }
+
+    let metadata = fs::metadata(path)?;
+    let modified_time = metadata.modified()?;
+
+    let contents = fs::read_to_string(path)?;
+    let config: WallpaperConfig = serde_json::from_str(&contents)
+        .map_err(|e| io::Error::new(io::ErrorKind::InvalidData, e))?;
+
+    Ok((config, modified_time))
+}
+
+fn set_wallpaper(path: &str) {
+    if !Path::new(path).exists() {
+        eprintln!("Wallpaper file not found: {}", path);
+        return;
+    }
+
+    let uri = format!("file://{}", path);
+
+    // Set both light and dark wallpaper
+    let keys = ["picture-uri", "picture-uri-dark"];
+    for key in &keys {
+        let result = Command::new("gsettings")
+            .args(&["set", "org.gnome.desktop.background", key, &uri])
+            .status();
+
+        match result {
+            Ok(status) if status.success() => {
+                println!("Set {} to: {}", key, path);
+            }
+            Ok(status) => {
+                eprintln!("gsettings failed setting {} with exit code: {}", key, status);
+            }
+            Err(e) => {
+                eprintln!("Failed to execute gsettings for {}: {}", key, e);
+            }
+        }
+    }
+}
+
+fn fetch_weather_condition(api_key: &str, city: &str) -> Result<Weather, Box<dyn std::error::Error>> {
+    let url = format!(
+        "http://api.weatherapi.com/v1/current.json?key={}&q={}&aqi=no",
+        api_key, city
+    );
+
+    let response = get(&url)?.json::<WeatherApiResponse>()?;
+
+    Ok(map_weather_code_to_enum(response.current.condition.code))
+}
+
+fn map_weather_code_to_enum(code: i32) -> Weather {
+    match code {
+        1000 => Weather::Clear, // Sunny/Clear
+        1003 => Weather::Cloudy, // Partly cloudy
+        1006 => Weather::Cloudy,
+        1009 => Weather::Overcast,
+        1030 | 1135 | 1147 => Weather::Fog, // Mist, Fog, Freezing fog
+
+        // Rain-related codes
+        1063 | 1150 | 1153 | 1168 | 1171 |
+        1180 | 1183 | 1186 | 1189 | 1192 | 1195 |
+        1198 | 1201 |
+        1240 | 1243 | 1246  => Weather::Rain,
+
+        // Thunderstorm-related codes
+        1087 | 1273 | 1276 => Weather::Thunderstorm,
+
+        // Snow-related codes
+        1066 | 1114 | 1117 |
+        1204 | 1207 |
+        1210 | 1213 | 1216 | 1219 | 1222 | 1225 |
+        1237 |
+        1255 | 1258 |
+        1261 | 1264 |
+        1279 | 1282 => Weather::Snow,
+
+        // Sleet and freezing drizzle – treat as Snow for simplicity
+        1069 | 1072 | 1249 | 1252 => Weather::Snow,
+
+        _ => Weather::Clear, // default fallback
+    }
+}
