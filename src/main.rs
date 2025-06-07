@@ -52,21 +52,17 @@ struct Current {
     condition: Condition,
 }
 
+// text is not used anymore, using codes now, but left it here for possible future use
 #[derive(Debug, Deserialize)]
 struct Condition {
     text: String,
     code: i32,
 }
 
-// CONSTS
-//const CONFIG_FILE: &str = "/home/sysfun/WallpaperSetup/wallpaper_config.json";
-//
-
-
-
+// get .config folder of current user and append our app path
 fn get_config_path() -> Option<String> {
     config_dir().map(|mut path| {
-        path.push(".config/rust-wallpaper/wallpaper_config.json");
+        path.push("rust-wallpaper/wallpaper_config.json");
         path.to_str().unwrap_or_default().to_string()
     })
 }
@@ -136,6 +132,9 @@ fn main() {
     }
 }
 
+// fn to find the best wallpaper match for current month, hour and weather conditions.
+// if doesnt find exact match, or file is missing, tries to find for similar weather, then for
+// less similar weather, if nothing found, adds hour. If doesnt find for any hour, adds month
 fn get_best_wallpaper_match(weather: &Weather, conf: &WallpaperConfig) -> String {
 
     let now = Local::now();
@@ -221,6 +220,8 @@ fn get_best_wallpaper_match(weather: &Weather, conf: &WallpaperConfig) -> String
     String::from("")
 }
 
+// loads config and timestamp of config modification, so that we can check for modification during
+// runtim
 fn load_config_with_timestamp(path: &str) -> Result<(WallpaperConfig, SystemTime), io::Error> {
     if !Path::new(path).exists() {
         return Err(io::Error::new(io::ErrorKind::NotFound, "Config file not found"));
@@ -236,6 +237,7 @@ fn load_config_with_timestamp(path: &str) -> Result<(WallpaperConfig, SystemTime
     Ok((config, modified_time))
 }
 
+// tries to set the wallpaper given, sets for both light and dark mode
 fn set_wallpaper(path: &str) {
     if !Path::new(path).exists() {
         eprintln!("Wallpaper file not found: {}", path);
@@ -264,6 +266,7 @@ fn set_wallpaper(path: &str) {
     }
 }
 
+// gets weather condition for current location from service
 fn fetch_weather_condition(api_key: &str, city: &str) -> Result<Weather, Box<dyn std::error::Error>> {
     let url = format!(
         "http://api.weatherapi.com/v1/current.json?key={}&q={}&aqi=no",
@@ -275,6 +278,7 @@ fn fetch_weather_condition(api_key: &str, city: &str) -> Result<Weather, Box<dyn
     Ok(map_weather_code_to_enum(response.current.condition.code))
 }
 
+// maps the weather condition code to one of the closest enum conditions
 fn map_weather_code_to_enum(code: i32) -> Weather {
     match code {
         1000 => Weather::Clear, // Sunny/Clear
@@ -308,7 +312,7 @@ fn map_weather_code_to_enum(code: i32) -> Weather {
     }
 }
 
-
+// map of more similar weather conditions (for example: cloudy is similar to clear and overcast, but not very similar to rain)
 fn is_similar_weather(a: &Weather, b: &Weather) -> bool {
     use Weather::*;
     matches!(
@@ -321,7 +325,7 @@ fn is_similar_weather(a: &Weather, b: &Weather) -> bool {
     )
 }
 
-
+// maps a bit less similar weather conditions (for example: cloudy is similar even to rainy in this scenario)
 fn is_less_similar_weather(a: &Weather, b: &Weather) -> bool {
     use Weather::*;
     matches!(
