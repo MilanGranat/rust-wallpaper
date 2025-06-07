@@ -9,7 +9,7 @@ A wallpaper service for **GNOME** that changes wallpaper according to **time of 
 ### 1. Configure `wallpaper_config.json`
 
 - Create a free account at [https://api.weatherapi.com](https://api.weatherapi.com).
-- Generate your **API key** and insert it as the value of `"api_key"` in the `wallpaper_config.json`.
+- Generate your **API key** and insert it as the value of `"api_key"` in the `wallpaper_config.json`. If you don't want to take weather into account, it should be possible to run the program without a valid API key, the service then would fail everytime, leaving the current_weather set to 'Clear'
 - Set your city name.
 - Move the file:
 
