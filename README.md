@@ -6,11 +6,17 @@ A wallpaper service for **GNOME** that changes wallpaper according to **time of 
 
 ## ⚙️ Setup & Configuration
 
-### 1. Configure `wallpaper_config.json`
+### 1. Configure weather service in `wallpaper_config.json`
 
+A. Using Open-meteo.com:
+- Set your latitude and longitude in the `wallpaper_config_json` (open_meteo_lat & open_meteo_long) as text values
+B. Using Weatherapi.com:
 - Create a free account at [https://api.weatherapi.com](https://api.weatherapi.com).
 - Generate your **API key** and insert it as the value of `"api_key"` in the `wallpaper_config.json`. If you don't want to take weather into account, leave api_key (or location) value empty, this will omit the calls to weather API and leave the current_weather set to 'Clear' always
 - Set your city name.
+
+### 2. Move the configuration
+
 - Move the file:
 
   ```bash
@@ -32,7 +38,7 @@ A wallpaper service for **GNOME** that changes wallpaper according to **time of 
 
 ---
 
-### 2. Create the Systemd User Service
+### 3. Create the Systemd User Service
 
 Create the file:
 
@@ -57,7 +63,7 @@ WantedBy=default.target
 
 ---
 
-### 3. Build and Deploy
+### 4. Build and Deploy
 
 From the repository root, run:
 
@@ -82,3 +88,7 @@ From the repository root, run:
 - If you change the JSON config while the service is running, it will reload the config on the next run.
 - Currently only works with **GNOME**.
 - This project was created as a home project to learn **Rust**. It's my first Rust project, so it's not perfect, but it gets the job done.
+
+## Updating
+
+- When updating, just repull the repository and run ./redeploy
