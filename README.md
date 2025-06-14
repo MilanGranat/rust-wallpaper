@@ -10,6 +10,7 @@ A wallpaper service for **GNOME** that changes wallpaper according to **time of 
 
 A. Using Open-meteo.com:
 - Set your latitude and longitude in the `wallpaper_config_json` (open_meteo_lat & open_meteo_long) as text values
+
 B. Using Weatherapi.com:
 - Create a free account at [https://api.weatherapi.com](https://api.weatherapi.com).
 - Generate your **API key** and insert it as the value of `"api_key"` in the `wallpaper_config.json`. If you don't want to take weather into account, leave api_key (or location) value empty, this will omit the calls to weather API and leave the current_weather set to 'Clear' always
