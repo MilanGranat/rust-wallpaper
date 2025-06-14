@@ -38,6 +38,8 @@ struct WallpaperConfig {
     items: Vec<WallpaperConfigItem>,
     api_key: String,
     location: String,
+    open_meteo_lat: Option<String>,
+    open_meteo_long: Option<String>,
 }
 
 // ---- WEATHER API STRUCTS ----
@@ -57,6 +59,35 @@ struct Current {
 struct Condition {
     text: String,
     code: i32,
+}
+
+
+// ---- OPEN METEO STRUCTS ----
+#[derive(Debug, Clone, Deserialize)]
+pub struct WeatherApiResponseOpenMeteo {
+    pub latitude: f64,
+    pub longitude: f64,
+    pub generationtime_ms: f64,
+    pub utc_offset_seconds: i32,
+    pub timezone: String,
+    pub timezone_abbreviation: String,
+    pub elevation: f64,
+    pub current_units: CurrentUnitsOpenMeteo,
+    pub current: CurrentOpenMeteo,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct CurrentUnitsOpenMeteo {
+    pub time: String,
+    pub interval: String,
+    pub weather_code: String,
+}
+
+#[derive(Debug, Clone, Deserialize)]
+pub struct CurrentOpenMeteo {
+    pub time: String,
+    pub interval: i32,
+    pub weather_code: i32,
 }
 
 // get .config folder of current user and append our app path
@@ -112,12 +143,27 @@ fn main() {
 
         // apply config
         if let Some(ref conf) = config {
-            if conf.api_key.is_empty() || conf.location.is_empty() {
-                current_condition = Weather::Clear;
+            let use_open_meteo = if let (Some(lat), Some(long)) = (&conf.open_meteo_lat, &conf.open_meteo_long) {
+                !lat.trim().is_empty() && !long.trim().is_empty()
             } else {
-                match fetch_weather_condition(&conf.api_key, &conf.location) {
-                        Ok(condition) => {current_condition = condition;},
-                        Err(e) => eprintln!("Failed to fetch weather: {}", e),
+                false
+            };
+
+            if use_open_meteo {
+                let lat = conf.open_meteo_lat.as_ref().unwrap();
+                let long = conf.open_meteo_long.as_ref().unwrap();
+                match fetch_weather_condition_open_meteo(lat, long) {
+                    Ok(condition) => {current_condition = condition;},
+                    Err(e) => eprintln!("Failed to fetch weather: {}", e),
+                }
+            } else {
+                if conf.api_key.is_empty() || conf.location.is_empty() {
+                    current_condition = Weather::Clear;
+                } else {
+                    match fetch_weather_condition(&conf.api_key, &conf.location) {
+                            Ok(condition) => {current_condition = condition;},
+                            Err(e) => eprintln!("Failed to fetch weather: {}", e),
+                    }
                 }
             }
 
@@ -282,7 +328,19 @@ fn fetch_weather_condition(api_key: &str, city: &str) -> Result<Weather, Box<dyn
     Ok(map_weather_code_to_enum(response.current.condition.code))
 }
 
+fn fetch_weather_condition_open_meteo(lat: &str, long: &str) -> Result<Weather, Box<dyn std::error::Error>> {
+    let url = format!(
+        "https://api.open-meteo.com/v1/forecast?latitude={}&longitude={}&current=weather_code",
+        lat, long
+    );
+
+    let response = get(&url)?.json::<WeatherApiResponseOpenMeteo>()?;
+
+    Ok(map_weather_code_to_enum_open_meteo(response.current.weather_code))
+}
+
 // maps the weather condition code to one of the closest enum conditions
+// weatherapi.com
 fn map_weather_code_to_enum(code: i32) -> Weather {
     match code {
         1000 => Weather::Clear, // Sunny/Clear
@@ -311,6 +369,36 @@ fn map_weather_code_to_enum(code: i32) -> Weather {
 
         // Sleet and freezing drizzle – treat as Snow for simplicity
         1072 | 1249 | 1252 => Weather::Snow,
+
+        _ => Weather::Clear, // default fallback
+    }
+}
+
+
+// maps the weather condition code to one of the closest enum conditions
+// open-meteo.com
+fn map_weather_code_to_enum_open_meteo(code: i32) -> Weather {
+    match code {
+        0 | 1 => Weather::Clear, // Sunny/Clear
+        2 => Weather::Cloudy, // Partly cloudy
+        3 => Weather::Overcast,
+        45 | 48 => Weather::Fog, // Mist, Fog, Freezing fog
+
+        // Rain-related codes
+        51 | 53 | 55 |
+        61 | 63 | 65 |
+        80 | 81 |
+        82  => Weather::Rain,
+
+        // Thunderstorm-related codes
+        95 | 96 | 99 => Weather::Thunderstorm,
+
+        // Snow-related codes
+        66 | 67 |
+        56 | 57 |
+        71 | 73 | 75 | 77 |
+        85 |
+        86 => Weather::Snow,
 
         _ => Weather::Clear, // default fallback
     }
