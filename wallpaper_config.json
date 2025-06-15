@@ -1,6 +1,8 @@
 {
   "location": "PUT_YOUR_CITY_NAME_OR_ZIP_CODE_HERE",
   "api_key": "YOUR_API_KEY_HERE",
+  "open_meteo_lat": "",
+  "open_meteo_long": "",
   "items": [
     {
       "start_hour": 5,
